@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "Error Notification",
+  "version": "1.0",
+  "description": "Notify on console errors",
+  "permissions": ["tabs", "notifications"],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
