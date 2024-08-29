@@ -3,6 +3,35 @@
  */
 var resText="this is include.js";
 
+function createNotification(){
+    var notificationList = window.LIST; // 通知リストを取得
+    
+    let notifications ='';
+    
+    // JSONにあるオブジェクト数の分だけfor文で処理
+    for (let i = 0; i < notificationList.length; i++) {
+        notifications +=
+        '<div class="alert '+ notificationList[i]["kind"] +' ">' +
+        '<p class="notification-item">'+
+        '<span class="icon"></span>'+
+        '<span class="title">'+ notificationList[i]["title"] +'</span>';
+        
+        for (messege in notificationList[i]["messages"]) {
+            notifications +=
+            '<span class="message">'+ notificationList[i]["messages"][messege].message +'</span>';
+        }
+        
+        notifications +=
+        '</p>'+
+        '<a class="closeBtn" href="javascript:void(0)">'+
+        '<i class="fa fa-times">X</i>'+
+        '</a>'+
+        '</div>';
+    }
+    
+    document.getElementById('notificationContents').innerHTML = notifications;
+}
+
 /**
  * 初期表示
  * json読み込み
@@ -73,23 +102,28 @@ window.addEventListener("load",function() {
     // 変数に格納したHTMLを出力
     document.getElementById('mainContent').innerHTML = main;
     document.getElementById('subContent2').innerHTML = sub;
+    
+    createNotification();
 });
 
+$(function(){
+    /**
+     * メニューボタン
+     */
+    
+    $("#menu-btn-check").click(function(){
+        var navWrapper = $(".sidebar");
+    
+      if (navWrapper.class.contains('active')) {
+        this.setAttribute("aria-expanded", "false");
+        this.setAttribute("aria-label", "menu");
+        navWrapper.classList.remove('active');
+      } else {
+        navWrapper.class.add('active');
+        this.setAttribute("aria-label", "close menu");
+        this.setAttribute("aria-expanded", "true");
+      }
+    });
+    
+});
 
-/**
- * メニューボタン
- */
-const navToggle = document.getElementsByClassName(".nav__toggle");
-const navWrapper = document.getElementsByClassName(".nav__wrapper");
-
-function menuButtonClick() {
-  if (navWrapper.classList.contains("active")) {
-    this.setAttribute("aria-expanded", "false");
-    this.setAttribute("aria-label", "menu");
-    navWrapper.classList.remove("active");
-  } else {
-    navWrapper.classList.add("active");
-    this.setAttribute("aria-label", "close menu");
-    this.setAttribute("aria-expanded", "true");
-  }
-}
