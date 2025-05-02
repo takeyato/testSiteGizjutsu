@@ -1,8 +1,6 @@
-/*
- *jQueryのCDN
+/**
+ *通知の生成
  */
-var resText="this is include.js";
-
 function createNotification(){
     var notificationList = window.LIST; // 通知リストを取得
     
@@ -106,11 +104,13 @@ window.addEventListener("load",function() {
     createNotification();
 });
 
+/**
+ *jQueryの常駐化
+ */
 $(function(){
     /**
      * メニューボタン
      */
-    
     $("#menu-btn-check").click(function(){
         var navWrapper = $(".sidebar");
     
